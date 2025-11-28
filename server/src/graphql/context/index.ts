@@ -15,7 +15,6 @@ export const buildContext = async ({
   const authHeader = req.headers.authorization
   let user: string | undefined
   let token: string | undefined
-  console.log('authHeader', authHeader)
   if (authHeader?.startsWith('Bearer ')) {
     token = authHeader.substring('Bearer '.length)
     try {
