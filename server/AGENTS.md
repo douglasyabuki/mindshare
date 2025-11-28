@@ -1,5 +1,10 @@
 # Mindshare Server - AGENTS.md
 
+## Status
+
+- **Last Updated**: 2025-11-28
+- **Latest Commit**: `ed55074`
+
 ## Project Overview
 
 Mindshare Server is a GraphQL API built with TypeScript, Express, and TypeGraphQL. It handles authentication and user management using Prisma with SQLite.
@@ -27,22 +32,32 @@ Mindshare Server is a GraphQL API built with TypeScript, Express, and TypeGraphQ
 
 - `src/index.ts`: Entry point, server setup.
 - `src/resolvers/`: GraphQL resolvers (Controllers).
+  - `auth.resolver.ts`: Login/Register mutations.
+  - `user.resolver.ts`: User queries/mutations.
 - `src/services/`: Business logic layer.
-- `src/models/`: GraphQL object types.
+- `src/models/`: GraphQL object types (`User`, `Idea`).
 - `src/dtos/`: Data Transfer Objects (Input/Output types).
-  - `src/dtos/input/`: Input arguments for mutations/queries.
-  - `src/dtos/output/`: Return types for mutations/queries.
+  - `src/dtos/input/`: Input arguments (e.g., `RegisterInput`, `LoginInput`, `CreateUserInput`).
+  - `src/dtos/output/`: Return types (e.g., `RegisterOutput`, `LoginOutput`).
 - `src/middlewares/`: Express and GraphQL middlewares.
+  - `auth.middleware.ts`: `IsAuthenticated` middleware.
 - `src/utils/`: Utility functions (hash, jwt, etc.).
-- `src/graphql/context/`: Context setup for GraphQL requests.
+- `src/graphql/context/`: Context setup for GraphQL requests (`buildContext`).
 - `prisma/`: Database schema and migrations.
 
 ## Conventions
 
 - **Dependency Injection**: Use manual dependency injection in Resolvers (instantiate Services).
 - **TypeGraphQL**: Use decorators (`@Resolver`, `@Query`, `@Mutation`, `@Field`, `@ObjectType`, `@InputType`) to define the schema.
-- **Prisma**: Use `prismaClient` singleton from `prisma/prisma.ts` (or similar).
+- **Prisma**: Use `prismaClient` singleton from `prisma/prisma.ts`.
 - **Async/Await**: Use async/await for all asynchronous operations.
 - **Naming**:
   - Files: `kebab-case.ts` (e.g., `auth.service.ts`, `user.resolver.ts`)
   - Classes: `PascalCase` (e.g., `AuthService`, `UserResolver`)
+
+## Recent Changes
+
+- Added `Idea` model to Prisma schema.
+- Implemented Login functionality (`LoginInput`, `LoginOutput`, `login` mutation).
+- Added `IsAuthenticated` middleware and `GraphqlContext`.
+- Updated `User` model (nullable password, relation to `Idea`).
