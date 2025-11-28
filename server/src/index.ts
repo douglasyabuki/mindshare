@@ -1,13 +1,16 @@
 import { ApolloServer } from '@apollo/server'
 import { expressMiddleware } from '@as-integrations/express5'
 import express from 'express'
+import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
+import { AuthResolver } from './resolvers/auth.resolver'
+import { UserResolver } from './resolvers/user.resolver'
 
 async function bootstrap() {
   const app = express()
 
   const schema = await buildSchema({
-    resolvers: [],
+    resolvers: [AuthResolver, UserResolver],
     validate: false,
     emitSchemaFile: './schema.graphql',
   })
@@ -25,7 +28,9 @@ async function bootstrap() {
       port: 4000,
     },
     () => {
-      console.log('Server initialized on port 4000 - http://localhost:4000')
+      console.log(
+        'Server initialized on port 4000 \nhttp://localhost:4000/graphql'
+      )
     }
   )
 }
