@@ -2,7 +2,7 @@
 
 ## Status
 
-- **Last Updated**: 2025-11-28
+- **Last Updated**: 2025-12-01
 - **Latest Commit**: `ed55074`
 
 ## Project Overview
@@ -34,8 +34,11 @@ Mindshare Server is a GraphQL API built with TypeScript, Express, and TypeGraphQ
 - `src/resolvers/`: GraphQL resolvers (Controllers).
   - `auth.resolver.ts`: Login/Register mutations.
   - `user.resolver.ts`: User queries/mutations.
+  - `idea.resolver.ts`: Idea CRUD operations.
+  - `comment.resolver.ts`: Comment management.
+  - `vote.resolver.ts`: Voting functionality.
 - `src/services/`: Business logic layer.
-- `src/models/`: GraphQL object types (`User`, `Idea`).
+- `src/models/`: GraphQL object types (`User`, `Idea`, `Comment`, `Vote`).
 - `src/dtos/`: Data Transfer Objects (Input/Output types).
   - `src/dtos/input/`: Input arguments (e.g., `RegisterInput`, `LoginInput`, `CreateUserInput`).
   - `src/dtos/output/`: Return types (e.g., `RegisterOutput`, `LoginOutput`).
@@ -57,7 +60,11 @@ Mindshare Server is a GraphQL API built with TypeScript, Express, and TypeGraphQ
 
 ## Recent Changes
 
-- Added `Idea` model to Prisma schema.
-- Implemented Login functionality (`LoginInput`, `LoginOutput`, `login` mutation).
-- Added `IsAuthenticated` middleware and `GraphqlContext`.
-- Updated `User` model (nullable password, relation to `Idea`).
+- **Backend Completed**: Implemented full functionality for Ideas, Comments, and Votes.
+- **Resolvers & Services**: Added `IdeaResolver`, `CommentResolver`, `VoteResolver` and corresponding services.
+- **Models**: Added `Comment` and `Vote` models.
+- **Fixes**: Resolved type mismatch in `VoteModel` (renamed `authorId` to `userId`).
+- **Features**:
+  - Idea CRUD (Create, Read, Update, Delete).
+  - Commenting system.
+  - Upvoting/Downvoting system.
