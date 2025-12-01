@@ -1,26 +1,26 @@
 import { Field, GraphQLISODateTime, ID, ObjectType } from 'type-graphql'
-import { CommentModel } from './comment.model'
+import { IdeaModel } from './idea.model'
 import { UserModel } from './user.model'
 
 @ObjectType()
-export class IdeaModel {
+export class CommentModel {
   @Field(() => ID)
   id!: string
 
   @Field(() => String)
-  title!: string
-
-  @Field(() => String, { nullable: true })
-  description?: string
+  content!: string
 
   @Field(() => String)
   authorId!: string
 
+  @Field(() => String)
+  ideaId!: string
+
   @Field(() => UserModel, { nullable: true })
   author?: UserModel
 
-  @Field(() => [CommentModel], { nullable: true })
-  comments?: CommentModel[]
+  @Field(() => IdeaModel, { nullable: true })
+  idea?: IdeaModel
 
   @Field(() => GraphQLISODateTime)
   createdAt!: Date
