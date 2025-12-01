@@ -18,6 +18,6 @@ export class UserResolver {
 
   @Query(() => UserModel)
   async getUser(@Arg('id', () => String) id: string): Promise<UserModel> {
-    return this.userService.findUser(id)
+    return this.userService.findUserById(id)
   }
 }
