@@ -3,6 +3,21 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type CommentModel {
+  author: UserModel
+  authorId: String!
+  content: String!
+  createdAt: DateTimeISO!
+  id: ID!
+  idea: IdeaModel
+  ideaId: String!
+  updatedAt: DateTimeISO!
+}
+
+input CreateCommentInput {
+  content: String!
+}
+
 input CreateIdeaInput {
   description: String
   title: String!
@@ -21,6 +36,7 @@ scalar DateTimeISO
 type IdeaModel {
   author: UserModel
   authorId: String!
+  comments: [CommentModel!]
   createdAt: DateTimeISO!
   description: String
   id: ID!
@@ -40,6 +56,7 @@ type LoginOutput {
 }
 
 type Mutation {
+  createComment(data: CreateCommentInput!, ideaId: String!): CommentModel!
   createIdea(data: CreateIdeaInput!): IdeaModel!
   createUser(data: CreateUserInput!): UserModel!
   deleteIdea(id: String!): Boolean!
