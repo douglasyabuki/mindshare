@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout";
 import { Login } from "./pages/auth/login";
-import { Signup } from "./pages/auth/sign-up";
+import { SignUp } from "./pages/auth/sign-up";
 import { useAuthStore } from "./stores/auth";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -30,7 +30,7 @@ export const App = () => {
           path="/signup"
           element={
             <PublicRoute>
-              <Signup />
+              <SignUp />
             </PublicRoute>
           }
         />
