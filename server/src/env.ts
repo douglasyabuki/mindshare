@@ -14,7 +14,7 @@ const envSchema = z.object({
     .refine(url => url.startsWith('postgresql://') || url.startsWith('file:'), {
       message: 'DATABASE_URL must start with postgresql:// or file: for SQLite',
     }),
-  JWT_SECRET: z.string().min(32),
+  JWT_SECRET: z.string(),
   CORS_ORIGINS: z.string().default('http://localhost:5173'),
 })
 
