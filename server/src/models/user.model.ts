@@ -5,13 +5,7 @@ import {
   ObjectType,
   registerEnumType,
 } from 'type-graphql'
-
-export enum Role {
-  owner = 'owner',
-  admin = 'admin',
-  member = 'member',
-  viewer = 'viewer',
-}
+import { Role } from './role.enum'
 
 registerEnumType(Role, {
   name: 'Role',

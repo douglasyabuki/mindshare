@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
-import { Role } from '../src/models/user.model'
+import { Role } from '../src/models/role.enum'
 
 const prisma = new PrismaClient()
 
