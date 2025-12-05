@@ -1,5 +1,5 @@
 import { Field, InputType } from 'type-graphql'
-import { Role } from '../../models/user.model'
+import { Role } from '../../models/role.enum'
 
 @InputType()
 export class CreateUserInput {

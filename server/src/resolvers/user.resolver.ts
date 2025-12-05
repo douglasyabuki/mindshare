@@ -1,5 +1,13 @@
-import { Arg, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql'
-import { CreateUserInput } from '../dtos/input/user.input'
+import {
+  Arg,
+  Ctx,
+  Mutation,
+  Query,
+  Resolver,
+  UseMiddleware,
+} from 'type-graphql'
+import { CreateUserInput, UpdateUserInput } from '../dtos/input/user.input'
+import { GraphqlContext } from '../graphql/context'
 import { IsAuthenticated } from '../middlewares/auth.middleware'
 import { UserModel } from '../models/user.model'
 import { UserService } from '../services/user.service'
@@ -16,8 +24,30 @@ export class UserResolver {
     return this.userService.createUser(data)
   }
 
+  @Mutation(() => UserModel)
+  async updateUser(
+    @Arg('id', () => String) id: string,
+    @Arg('data', () => UpdateUserInput) data: UpdateUserInput
+  ): Promise<UserModel> {
+    return this.userService.updateUser(id, data)
+  }
+
+  @Mutation(() => Boolean)
+  async deleteUser(
+    @Arg('id', () => String) id: string,
+    @Ctx() ctx: GraphqlContext
+  ): Promise<boolean> {
+    if (ctx.user === id) throw new Error('You cannot delete yourself.')
+    return this.userService.deleteUser(id)
+  }
+
   @Query(() => UserModel)
   async getUser(@Arg('id', () => String) id: string): Promise<UserModel> {
     return this.userService.findUserById(id)
+  }
+
+  @Query(() => [UserModel])
+  async listUsers(): Promise<UserModel[]> {
+    return this.userService.listUsers()
   }
 }
