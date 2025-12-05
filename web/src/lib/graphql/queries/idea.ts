@@ -48,7 +48,7 @@ export const GET_IDEA = gql`
         name
         email
       }
-      countVotes
+      votesCount
       comments {
         id
         ideaId
