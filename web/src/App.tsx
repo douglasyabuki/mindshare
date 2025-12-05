@@ -3,6 +3,7 @@ import { Layout } from "./components/layout";
 import { Login } from "./pages/auth/login";
 import { SignUp } from "./pages/auth/sign-up";
 import { Ideas } from "./pages/ideas/ideas";
+import { Members } from "./pages/members/Members";
 import { useAuthStore } from "./stores/auth";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -40,6 +41,14 @@ export const App = () => {
           element={
             <ProtectedRoute>
               <Ideas />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/members"
+          element={
+            <ProtectedRoute>
+              <Members />
             </ProtectedRoute>
           }
         />
