@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout";
 import { Login } from "./pages/auth/login";
 import { SignUp } from "./pages/auth/sign-up";
+import { Ideas } from "./pages/ideas/ideas";
 import { useAuthStore } from "./stores/auth";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -32,6 +33,14 @@ export const App = () => {
             <PublicRoute>
               <SignUp />
             </PublicRoute>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Ideas />
+            </ProtectedRoute>
           }
         />
       </Routes>
