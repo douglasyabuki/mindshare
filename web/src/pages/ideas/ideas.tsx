@@ -36,7 +36,7 @@ export const Ideas = () => {
           </Button>
         </div>
       </div>
-      <div className="grid gap-4 pt-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-4 pt-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {loading &&
           Array.from({ length: 4 }).map((_, i) => (
             <div
