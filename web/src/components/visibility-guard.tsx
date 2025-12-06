@@ -23,11 +23,9 @@ export const VisibilityGuard = ({
     return <>{children}</>;
   }
 
-  const hasAllowedRole =
-    roles && roles.length > 0 && user.role ? roles.includes(user.role) : false;
+  const hasAllowedRole = user.role ? roles!.includes(user.role) : false;
 
-  const hasAllowedUserId =
-    userIds && userIds.length > 0 ? userIds.includes(user.id) : false;
+  const hasAllowedUserId = user.id ? userIds!.includes(user.id) : false;
 
   if (hasAllowedRole || hasAllowedUserId) {
     return <>{children}</>;
