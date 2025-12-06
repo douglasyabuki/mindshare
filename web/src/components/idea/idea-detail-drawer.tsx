@@ -1,5 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Drawer, DrawerContentRight } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContentRight,
+  DrawerTitle,
+} from "@/components/ui/drawer";
 import { CREATE_COMMENT } from "@/lib/graphql/mutations/comment";
 import { TOGGLE_VOTE } from "@/lib/graphql/mutations/vote";
 import { GET_IDEA } from "@/lib/graphql/queries/idea";
@@ -75,9 +79,9 @@ export function IdeaDetailDrawer({
       <DrawerContentRight className="flex flex-col rounded-l-2xl">
         <div className="flex-shrink-0 rounded-l-2xl bg-slate-100 p-6">
           <div className="flex items-start justify-between">
-            <h2 className="flex-1 pr-4 text-2xl font-bold">
+            <DrawerTitle className="flex-1 pr-4 text-2xl font-bold">
               {idea?.title || "Carregando..."}
-            </h2>
+            </DrawerTitle>
             <Button
               variant="ghost"
               size="icon"
