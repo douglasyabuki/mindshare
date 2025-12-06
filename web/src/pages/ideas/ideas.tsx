@@ -1,4 +1,5 @@
 import { CreateIdeaDialog } from "@/components/idea/create-idea-dialog";
+import { DeleteIdeaDialog } from "@/components/idea/delete-idea-dialog";
 import { IdeaCard } from "@/components/idea/idea-card";
 import { IdeaDetailDrawer } from "@/components/idea/idea-detail-drawer";
 import { Page } from "@/components/page";
@@ -13,16 +14,23 @@ import { useState } from "react";
 export const Ideas = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const { data, loading, refetch } = useQuery<{ listIdeas: Idea[] }>(
     LIST_IDEAS,
   );
   const [selectedIdeaId, setSelectedIdeaId] = useState<string | null>(null);
+  const [ideaToDelete, setIdeaToDelete] = useState<Idea | null>(null);
 
   const ideas = data?.listIdeas || [];
 
   const handleIdeaClick = (ideaId: string) => {
     setSelectedIdeaId(ideaId);
     setOpenDrawer(true);
+  };
+
+  const handleDeleteClick = (idea: Idea) => {
+    setIdeaToDelete(idea);
+    setOpenDeleteDialog(true);
   };
 
   return (
@@ -50,6 +58,7 @@ export const Ideas = () => {
               key={idea.id}
               idea={idea}
               onClick={() => handleIdeaClick(idea.id)}
+              onDelete={() => handleDeleteClick(idea)}
             />
           ))}
       </div>
@@ -62,6 +71,12 @@ export const Ideas = () => {
         open={openDialog}
         onOpenChange={setOpenDialog}
         onCreated={() => refetch()}
+      />
+      <DeleteIdeaDialog
+        open={openDeleteDialog}
+        onOpenChange={setOpenDeleteDialog}
+        idea={ideaToDelete}
+        onDeleted={() => refetch()}
       />
     </Page>
   );

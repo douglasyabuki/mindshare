@@ -1,15 +1,23 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { VisibilityGuard } from "@/components/visibility-guard";
 import { formatRelativeDate } from "@/lib/utils";
 import type { Idea } from "@/types";
-import { MessageSquare, ThumbsUp } from "lucide-react";
+import { MessageSquare, ThumbsUp, Trash2 } from "lucide-react";
 
 interface IdeaCard {
   idea: Idea;
   onClick: () => void;
+  onDelete?: () => void;
 }
 
-export const IdeaCard = ({ idea, onClick }: IdeaCard) => {
+export const IdeaCard = ({ idea, onClick, onDelete }: IdeaCard) => {
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDelete?.();
+  };
+
   return (
     <Card
       key={idea.id}
@@ -18,15 +26,30 @@ export const IdeaCard = ({ idea, onClick }: IdeaCard) => {
     >
       <CardHeader>
         <CardTitle className="line-clamp-2">
-          <div className="flex items-center gap-2">
-            <Avatar className="h-8 w-8">
-              <AvatarFallback className="text-primary-foreground bg-zinc-950 text-sm">
-                {idea.author?.name?.charAt(0)}
-              </AvatarFallback>
-            </Avatar>
-            <span className="line-clamp-1 text-sm font-medium">
-              {idea.author?.name || "User"}
-            </span>
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Avatar className="h-8 w-8">
+                <AvatarFallback className="text-primary-foreground bg-zinc-950 text-sm">
+                  {idea.author?.name?.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+              <span className="line-clamp-1 text-sm font-medium">
+                {idea.author?.name || "User"}
+              </span>
+            </div>
+            <VisibilityGuard
+              userIds={[idea.authorId]}
+              roles={["admin", "owner"]}
+            >
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 flex-shrink-0"
+                onClick={handleDeleteClick}
+              >
+                <Trash2 className="h-4 w-4 text-red-500" />
+              </Button>
+            </VisibilityGuard>
           </div>
         </CardTitle>
       </CardHeader>

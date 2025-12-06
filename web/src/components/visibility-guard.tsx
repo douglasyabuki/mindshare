@@ -1,9 +1,10 @@
 import { useAuthStore } from "@/stores/auth";
+import type { Role } from "@/types";
 import type { ReactNode } from "react";
 
 interface VisibilityGuard {
   children: ReactNode;
-  roles?: string[];
+  roles?: Role[];
   userIds?: string[];
 }
 
@@ -23,7 +24,7 @@ export const VisibilityGuard = ({
   }
 
   const hasAllowedRole =
-    roles && roles.length > 0 ? roles.includes(user.role || "") : false;
+    roles && roles.length > 0 && user.role ? roles.includes(user.role) : false;
 
   const hasAllowedUserId =
     userIds && userIds.length > 0 ? userIds.includes(user.id) : false;

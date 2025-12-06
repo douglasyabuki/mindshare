@@ -42,3 +42,9 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const DELETE_IDEA = gql`
+  mutation DeleteIdea($id: String!) {
+    deleteIdea(id: $id)
+  }
+`;
