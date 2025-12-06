@@ -1,10 +1,5 @@
 # Mindshare Server - AGENTS.md
 
-## Status
-
-- **Last Updated**: 2025-12-01
-- **Latest Commit**: `ed55074`
-
 ## Project Overview
 
 Mindshare Server is a GraphQL API built with TypeScript, Express, and TypeGraphQL. It handles authentication and user management using Prisma with SQLite.
